@@ -5,7 +5,6 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     conkat = require('gulp-concat'),
     stylus = require('gulp-stylus');
-;
 
 var es6Files = ['src/scripts/**/*.js', '!src/scripts/vendor/**'];
 var styles = 'src/styles/**/*.styl';

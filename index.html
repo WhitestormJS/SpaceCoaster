@@ -4,13 +4,28 @@
     <meta charset="utf-8">
     <title>SpaceCoaster</title>
     <link rel="stylesheet" href="dist/main.css">
+    <link href='https://fonts.googleapis.com/css?family=Raleway:700' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <main class="game">
-
+    <section class="preloader">
+      <img src="img/space.svg" alt="space coaster">
+    </section>
+    <main id="blocker">
+      <div class="container">
+        <img src="img/space.svg" class="title" alt="">
+        <h1>Hi! Let's take a ride!</h1>
+      </div>
     </main>
+    <!-- vendor files from whitestormjs-->
     <script src="src/scripts/vendor/three.min.js" charset="utf-8"></script>
     <script src="src/scripts/vendor/physi.js" charset="utf-8"></script>
+
+    <script src="src/scripts/vendor/whitestorm.min.js" charset="utf-8"></script>
+
+    <!-- plugins -->
+    <script src="src/plugins/whs.preload.js" charset="utf-8"></script>
+
+    <!-- game script -->
     <script src="dist/game.js" charset="utf-8"></script>
   </body>
 </html>

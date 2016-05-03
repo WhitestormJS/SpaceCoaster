@@ -1,3 +1,53 @@
-body {
-  margin: 0;
-}
+body
+  margin 0
+
+.preloader
+  width 100vw                                                                                                                                                                                                                                          ;
+  height 100vh
+  background-color #193d67
+  display flex
+  align-items center
+
+  img
+   margin auto
+   animation load 1.2s infinite
+
+
+
+@keyframes load
+  from
+    transform scale3d(1, 1, 1)
+
+  50%
+    transform scale3d(1.05, 1.05, 1.05)
+
+  to
+    transform scale3d(1, 1, 1)
+
+#blocker
+  min-width 100vw
+  min-height 100vh
+  position fixed
+  z-index 2
+  background-color rgba(#193d67, 0.48)
+
+  .container
+    max-width 62.5rem
+    margin 0 auto
+
+    padding 1.5%
+    display flex
+    flex-flow column
+    justify-content space-around
+    text-align center
+
+  .title
+    height 25vh
+
+*
+  font-family: 'Raleway', sans-serif;
+  color white
+
+  h1
+    font-weight bold
+    font-size 3.5em
