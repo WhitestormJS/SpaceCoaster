@@ -6,7 +6,7 @@ const game = new WHS.World({
 
   gravity: {
     x: 0,
-    y: -25,
+    y: 0,
     z: 0
   },
 
