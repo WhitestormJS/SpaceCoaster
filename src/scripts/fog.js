@@ -1,5 +1,5 @@
 const fog = game.FogExp2({
-  hex: 0x4edfa2,
+  hex: 0x25424d,
   near: 1,
-  far: game.__defaults.camera.far
+  far: 500
 });
