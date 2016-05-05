@@ -1,9 +1,9 @@
-const person = game.Sphere( {
+var person = game.Sphere( {
     geometry: {
         radius: 2
     },
 
-    mass: 10,
+    mass: 5,
     onlyvis: false,
 
     material: {
@@ -14,9 +14,9 @@ const person = game.Sphere( {
     },
 
     pos: {
-        x: 0,
-        y: 100,
-        z: 0
+        x: 1000,
+        y: 1000,
+        z: 1000
     }
 
 } );
@@ -24,5 +24,5 @@ const person = game.Sphere( {
 
 game.FPSControls( person, { // *WHS* object, Pointer lock controls object, Jquery blocker div selector.
     block: document.getElementById('blocker'),
-    speed: 2 // 5
+    speed: 1 // 5
 } );
