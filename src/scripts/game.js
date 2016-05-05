@@ -11,7 +11,8 @@ const game = new WHS.World({
   },
 
   camera: {
-      far: 10000
+    far: 10000,
+    aspect: 45
   },
 
   shadowmap: {
@@ -29,5 +30,7 @@ const game = new WHS.World({
 });
 
 game.start();
+
+let camera = game.getCamera();
 
 preloader.check();

@@ -5,7 +5,6 @@ const spaceship = game.Model({
   },
 
   material: {
-
   },
 
   mass: 0,
@@ -17,8 +16,8 @@ const spaceship = game.Model({
 
   rotation: {
       x: 0,
-      y: Math.PI / 2,
-      z: 0,
+      z: Math.PI / 4,
+      y: 0,
   },
 
   scale: {
@@ -64,6 +63,6 @@ curve.add(
 
 
 spaceship.addTo(game,'wait').then(function(obj){
-  obj.follow(curve,120000,false);
+  obj.follow(curve,245000,false);
   spaceship.add(shipSound);
 });

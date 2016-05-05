@@ -13,7 +13,8 @@ var game = new WHS.World({
   },
 
   camera: {
-    far: 10000
+    far: 10000,
+    aspect: 45
   },
 
   shadowmap: {
@@ -32,11 +33,14 @@ var game = new WHS.World({
 
 game.start();
 
+var camera = game.getCamera();
+
 preloader.check();
 'use strict';
 
 var track = new THREE.AudioListener();
 var soundtrack = new THREE.Audio(track);
+var shipSound = new THREE.Audio(track);
 var camera = game.getCamera();
 var loader = new THREE.AudioLoader();
 
@@ -50,6 +54,13 @@ loader.load('assets/audio/365-days-in-space.ogg', function (audioBuffer) {
 }, function (xhr) {}, function (xhr) {
   console.log('An error happened');
 });
+
+loader.load('assets/audio/flyby.ogg', function (audioBuffer) {
+  shipSound.setBuffer(audioBuffer);
+  shipSound.loaded = true;
+}, function (xhr) {}, function (xhr) {
+  console.log('An error happened');
+});
 "use strict";
 
 var person = game.Sphere({
@@ -57,7 +68,7 @@ var person = game.Sphere({
         radius: 2
     },
 
-    mass: 10,
+    mass: 5,
     onlyvis: false,
 
     material: {
@@ -68,23 +79,23 @@ var person = game.Sphere({
     },
 
     pos: {
-        x: 0,
-        y: 100,
-        z: 0
+        x: 1000,
+        y: 1000,
+        z: 1000
     }
 
 });
 
 game.FPSControls(person, { // *WHS* object, Pointer lock controls object, Jquery blocker div selector.
     block: document.getElementById('blocker'),
-    speed: 2 // 5
+    speed: 1 // 5
 });
 "use strict";
 
 var fog = game.FogExp2({
-  hex: 0x4edfa2,
+  hex: 0x25424d,
   near: 1,
-  far: game.__defaults.camera.far
+  far: 5
 });
 "use strict";
 
@@ -101,7 +112,7 @@ var ambient = game.AmbientLight({
 
         target: {
             x: 0,
-            y: 10,
+            y: 0,
             z: 0
         }
     }
@@ -110,7 +121,7 @@ var ambient = game.AmbientLight({
 var spot = game.SpotLight({
     light: {
         color: 0x83DCF9,
-        intensity: 0.3,
+        intensity: 0.8,
         distance: 500
     },
 
@@ -129,9 +140,122 @@ var spot = game.SpotLight({
     // 100
     target: {
         x: 0,
-        y: 10,
+        y: 0,
         z: 0
     }
+});
+'use strict';
+
+var sunTexture = WHS.API.texture('assets/textures/sun.jpg');
+var jupiterTexture = WHS.API.texture('assets/textures/jupiter.jpg');
+var sun = game.Model({
+  geometry: {
+    path: 'assets/models/ik89123.json'
+  },
+
+  material: {
+    shading: THREE.SmoothShading,
+    map: sunTexture,
+    bunmap: sunTexture,
+    kind: 'phong',
+    wireframe: false,
+    vertexColors: false,
+    doubleSided: true,
+    depthWrite: true,
+    emissive: 0xffffff,
+    emissiveIntensity: 0.3
+  },
+
+  mass: 0,
+  pos: {
+    x: 500,
+    y: 500,
+    z: 500
+  },
+
+  scale: {
+    x: 50,
+    y: 50,
+    z: 50
+  }
+});
+
+var jupiter = game.Model({
+  geometry: {
+    path: 'assets/models/ik89123.json'
+  },
+
+  material: {
+    shading: THREE.SmoothShading,
+    map: jupiterTexture,
+    bunmap: jupiterTexture,
+    kind: 'phong',
+    wireframe: false,
+    vertexColors: false,
+    doubleSided: true,
+    depthWrite: true,
+    emissive: 0xde9fa3,
+    emissiveIntensity: 0.3
+  },
+
+  mass: 0,
+  pos: {
+    x: 500,
+    y: 650,
+    z: 120
+  },
+
+  scale: {
+    x: 20,
+    y: 20,
+    z: 20
+  }
+});
+
+setInterval(function () {
+  var rot = sun.rotation;
+  sun.rotation.set(rot.x += 0.2, 0, 0);
+  requestAnimationFrame();
+}, 1);
+'use strict';
+
+var spaceship = game.Model({
+    geometry: {
+        path: 'assets/models/spaceship.json',
+        physics: 'assets/models/spaceship_low.json'
+    },
+
+    material: {},
+
+    mass: 0,
+    pos: {
+        x: -1000,
+        y: -1000,
+        z: -1000
+    },
+
+    rotation: {
+        x: 0,
+        z: Math.PI / 4,
+        y: 0
+    },
+
+    scale: {
+        x: 1,
+        y: 1,
+        z: 1
+    }
+});
+var curve = new THREE.CurvePath();
+curve.add(new THREE.CubicBezierCurve3(new THREE.Vector3(-1000, -1000, -1000), new THREE.Vector3(-865, -650, -525), new THREE.Vector3(-350, -350, -225), new THREE.Vector3(-100, -100, -100)));
+curve.add(new THREE.CubicBezierCurve3(new THREE.Vector3(-100, -100, -100), new THREE.Vector3(0, 0, 0), new THREE.Vector3(25, 125, 0), new THREE.Vector3(200, 100, 350)));
+curve.add(new THREE.CubicBezierCurve3(new THREE.Vector3(200, 100, 350), new THREE.Vector3(350, 250, 350), new THREE.Vector3(650, 750, 750), new THREE.Vector3(1000, 1000, 1000)));
+
+curve.add(new THREE.CubicBezierCurve3(new THREE.Vector3(1000, 1000, 1000), new THREE.Vector3(1250, 1250, 3500), new THREE.Vector3(6500, 7500, 7500), new THREE.Vector3(10000, 10000, 10000)));
+
+spaceship.addTo(game, 'wait').then(function (obj) {
+    obj.follow(curve, 245000, false);
+    spaceship.add(shipSound);
 });
 "use strict";
 
@@ -139,6 +263,6 @@ game.skybox = game.Skybox({
     path: "img/space",
     imgSuffix: ".jpg",
     skyType: "sphere",
-    radius: game.__defaults.camera.far
+    radius: 10000
 });
 //# sourceMappingURL=game.js.map
