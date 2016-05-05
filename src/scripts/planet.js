@@ -69,4 +69,4 @@ setInterval(function(){
     var rot = sun.rotation;
     sun.rotation.set(rot.x+=0.2, 0,0);
     requestAnimationFrame();
-}, 1);
+}, 500);
