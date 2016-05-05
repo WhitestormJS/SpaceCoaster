@@ -1,4 +1,4 @@
-const ambient = game.AmbientLight({
+let ambient = game.AmbientLight({
   light: {
     color: 0x83DCF9,
     intensity: 0.2,
@@ -11,16 +11,16 @@ const ambient = game.AmbientLight({
 
     target: {
         x: 0,
-        y: 10,
+        y: 0,
         z: 0
     }
   }
 });
 
-const spot = game.SpotLight( {
+let spot = game.SpotLight( {
     light: {
         color: 0x83DCF9,
-        intensity: 0.3,
+        intensity: 0.8,
         distance: 500,
     },
 
@@ -39,7 +39,7 @@ const spot = game.SpotLight( {
 
     target: {
         x: 0,
-        y: 10,
+        y: 0,
         z: 0
     }
 } );
