@@ -1,0 +1,21 @@
+{
+  "generator-fountain-react": {
+    "version": "1.0.0-rc1",
+    "props": {
+      "css": "styl",
+      "namespace": "fountain-react:app",
+      "resolved": "/home/taro/.nvm/versions/node/v5.7.0/lib/node_modules/generator-fountain-react/generators/app/index.js",
+      "modules": "webpack",
+      "framework": "react",
+      "argv": {
+        "remain": [],
+        "cooked": [],
+        "original": []
+      },
+      "ci": [],
+      "js": "babel",
+      "sample": "hello",
+      "router": "router"
+    }
+  }
+}
