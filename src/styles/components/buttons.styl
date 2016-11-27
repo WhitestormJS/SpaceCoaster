@@ -1,0 +1,19 @@
+btn($color)
+  border $color 1px solid
+  padding 5px 15px
+  border-radius 50px
+  color $color
+  min-width 100px
+
+
+.main-btn
+  btn($green)
+  font-size 28px
+  background-color transparent
+  text-transform lowercase
+  font-family monospace
+  outline none
+  transition background-color ease-in 125ms
+
+  &:hover
+    background-color rgba($green, 0.35)
